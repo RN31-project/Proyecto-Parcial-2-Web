@@ -1,7 +1,7 @@
 :root {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #06457f;
-  background: #262b40;
+  color: #172033;
+  background: #f4f7fb;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,162 +14,21 @@ body {
   margin: 0;
 }
 
-.app-fondo {
-  display: grid;
+.app-shell {
   min-height: 100vh;
-  place-items: center;
-  padding: 24px;
-  background:
-    radial-gradient(ellipse at 15% 15%, #06457f 0, transparent 36%),
-    radial-gradient(ellipse at 90% 85%, #06457f 0, transparent 32%),
-    #262b40;
+  background: radial-gradient(circle at top right, #e5edff, transparent 35%), #f4f7fb;
 }
 
-.game-card {
-  width: 100%;
-  max-width: 460px;
-  border: 1px solid #262b40;
-  border-radius: 24px;
-  background: #262b40
+.welcome-card {
+  max-width: 720px;
+  margin: 8vh auto 0;
+  border: 1px solid #e6eaf1;
+  border-radius: 1rem;
 }
 
-.game-card-body {
-  padding: 44px 40px 32px;
-  text-align: center;
-}
-
-.game-icon {
-  display: grid;
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 22px;
-  place-items: center;
-  border-radius: 20px;
-  background: #a8c4ec;
-  color: #06457f;
-  font-size: 2rem;
-  font-weight: 800;
-}
-
-.game-acom-icono {
-  margin-bottom: 8px;
-  color: #A8C4EC;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-
-.game-card h1 {
-  margin-bottom: 12px;
-  color: #A8C4EC;
-  font-size: clamp(1.8rem, 6vw, 2.2rem);
-  font-weight: 800;
-  letter-spacing: -0.04em;
-}
-
-.game-description {
-  margin: 0 auto 28px;
-  color: #A8C4EC;
-  line-height: 1.6;
-}
-
-.dice-section {
-  display: grid;
-  justify-items: center;
-  gap: 12px;
-  margin: 0 auto 28px;
-  padding: 18px;
-  border: 1px solid rgba(168, 196, 236, 0.25);
-  border-radius: 16px;
-  background: rgba(6, 69, 127, 0.18);
-}
-
-.dice-label {
-  margin: 0;
-  color: #A8C4EC;
-  font-size: 0.7rem;
-  font-weight: 800;
-  letter-spacing: 0.14em;
-}
-/* Cambios de estilo para el resultado del dado */
-.dice-result {
-  display: grid;
-  width: 76px;
-  height: 76px;
-  place-items: center;
-  border: 2px solid #A8C4EC;
-  border-radius: 18px;
-  background: #A8C4EC;
-  box-shadow: 0 6px 0 #668bbd;
-  color: #06457f;
-  font-size: 2rem;
-  font-weight: 800;
-  font-variant-numeric: tabular-nums;
-  transition: background-color 250ms ease, border-color 250ms ease, box-shadow 250ms ease, color 250ms ease;
-}
-/* Cambios de estilo para el resultado del dado cuando es correcto */
-.dice-result.is-correct {
-  border-color: #86efac;
-  background: #86efac;
-  box-shadow: 0 6px 0 #22c55e;
-  color: #14532d;
-}
-
-.dice-result.is-rolling {
-  animation: dice-shake 0.16s linear infinite alternate;
-}
-
-@keyframes dice-shake {
-  from {
-    transform: rotate(-8deg) translateY(-2px);
-  }
-  to {
-    transform: rotate(8deg) translateY(2px);
-  }
-}
-
-.game-card .form-control {
-  min-height: 52px;
-  border-color: #262b40;
-  border-radius: 12px;
-  text-align: center;
-}
-
-.game-card .form-control:focus {
-  border-color: #4854c5;
-  box-shadow: 0 0 0 3px rgba(72, 84, 197, 0.2);
-}
-
-.guess-button {
-  min-height: 52px;
-  border: 0;
-  border-radius: 12px;
-  background: #0474c4;
+.eyebrow {
+  color: #5269d8;
+  font-size: 0.75rem;
   font-weight: 700;
-}
-/* Cambios de estilo para el botón al pasar el mouse */
-
-.game-message {
-  min-height: 48px;
-  margin: 24px 0 8px;
-  color: #A8C4EC;
-  line-height: 1.5;
-}
-
-.attempt-count {
-  margin: 0;
-  color: #a8c4ec;
-  font-size: 0.85rem;
-}
-
-@media (max-width: 480px) {
-  .game-card-body {
-    padding: 36px 24px 28px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .dice-result.is-rolling {
-    animation: none;
-  }
+  letter-spacing: 0.12em;
 }
