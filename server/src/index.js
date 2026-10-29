@@ -1,19 +1,21 @@
-import express from 'express'
+import express from 'express';
+import cors from 'cors';
+import foodDeiRoutes from './routes/foodDEI.routes.js';
 
-const app = express()
-const port = Number(process.env.PORT) || 4000
+const app = express();
+const port = Number(process.env.PORT) || 4000;
 
-import cors from 'cors'
-app.use(cors())
-app.use(express.json())
+// Configuración inicial 
+app.use(cors());
+app.use(express.json());
 
-//generar num aletorio entre 1-100
-const generarNum = () => Math.floor(Math.random() * 100) + 1
-let numeroOculto = generarNum()
+// Montar las rutas del Caso de Negocio 2 (Food DEI)
+app.use('/api', foodDeiRoutes);
 
+// Ruta de diagnóstico / health check
 app.get('/api/health', (_request, response) => {
-  response.json({ status: 'ok', message: 'API conectada correctamente.' })
-})
+  response.json({ status: 'ok', message: 'API conectada correctamente.' });
+});
 
 //dice si es mas o menos
 app.post('/guess', (request, response) => {
@@ -38,5 +40,5 @@ app.post('/reset', (_request, response) => {
 })
 
 app.listen(port, () => {
-  console.log(`API disponible en http://localhost:${port}`)
-})
+  console.log(`API disponible en http://localhost:${port}`);
+});
