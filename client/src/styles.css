@@ -54,7 +54,7 @@ body {
 .game-acom-icono {
   margin-bottom: 8px;
   color: #A8C4EC;
-  font-size: 0.72rem;
+  font-size: 1.25rem;
   font-weight: 800;
   letter-spacing: 0.14em;
 }
@@ -302,4 +302,15 @@ body {
     top: 12px;
     right: 12px;
   }
+}
+
+.plato-img {
+  height: 180px;
+  object-fit: cover;
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  border-radius: 0;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
 }

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
-import { Button, Card, CardBody } from 'reactstrap'
+import { Button, Card, CardBody, Row, Col } from 'reactstrap'
 import { useEffect, useRef, useState } from 'react'
+import {CardImg} from 'reactstrap'
 
 function Cocina() 
   {
@@ -65,45 +66,53 @@ function Cocina()
           </Link>
         </div>
       </nav>
+      <Row>
+        <Col xs="12" md="4">
       <Card className="game-card shadow">
         <CardBody className="game-card-body">
-          <div className="game-icon" aria-hidden="true">+</div>
+          <CardImg top src="/img/pizza-margarita.jpg" alt="Pizza Margarita" />
           <p className="game-acom-icono">Menu</p>
           <h1>Pizza Margarita</h1>
           <p className="game-description">
-            pizza con salsa de tomate, mozzarella y albahaca fresca.
+            Pizza con salsa de tomate, mozzarella y albahaca fresca.
           </p>
           <Button color="primary" className="guess-button w-100">
-            pedir plato
+            Pedir plato
           </Button>
         </CardBody>
       </Card>
+      </Col>
+      <Col xs="12" md="4">
       <Card className="game-card shadow">
         <CardBody className="game-card-body">
-          <div className="game-icon" aria-hidden="true">+</div>
+          <CardImg top src="/img/pasta-bolonesa.jpg" alt="Pasta Boloñesa" />
           <p className="game-acom-icono">Menu</p>
           <h1>Pasta boloñesa</h1>
           <p className="game-description">
-            pasta salsa boloñesa, carne molida, tomate, cebolla, ajo y especias.
+            Pasta con salsa boloñesa, carne molida, tomate, cebolla, ajo y especias.
           </p>
           <Button color="primary" className="guess-button w-100">
-            pedir plato
+            Pedir plato
           </Button>
         </CardBody>
       </Card>
+      </Col>
+      <Col xs="12" md="4">
       <Card className="game-card shadow">
         <CardBody className="game-card-body">
-          <div className="game-icon" aria-hidden="true">+</div>
+          <CardImg top src="/img/pasta-alfredo.jpg" alt="Pasta Alfredo" />
           <p className="game-acom-icono">Menu</p>
           <h1>Pasta Alfredo</h1>
           <p className="game-description">
-            pasta con champiñones crema, queso parmesano, ajo, mantequilla y especias.
+            Pasta con champiñones crema, queso parmesano, ajo, mantequilla y especias.
           </p>
           <Button color="primary" className="guess-button w-100">
-            pedir plato
+            Pedir plato
           </Button>
         </CardBody>
       </Card>
+      </Col>
+      </Row>
     </main>
   )
 }
