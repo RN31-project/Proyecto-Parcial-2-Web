@@ -1,4 +1,4 @@
-const { calcularTotalReserva } = require('../utils/helpers');
+import { calcularTotalReserva } from '../utils/helpers.js';
 // --- ESTADO EN MEMORIA (Food DEI S.A. de R.L.) ---
 let menu = [
     { id: 101, nombre: "Pollo asado", precio: 4.00, stock: 12, categoria: "Fuerte" },
@@ -209,7 +209,7 @@ const confirmarReserva = (_req, res) => {
     });
 };
 
-module.exports = {
+export default {
     getMenu,
     getReserva,
     agregarReserva,
