@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Button, Card, CardBody, Row, Col } from 'reactstrap'
+import { Button, Card, CardBody, Row, Col, Navbar, NavbarBrand, Badge } from 'reactstrap'
 import { useEffect, useRef, useState } from 'react'
 import {CardImg} from 'reactstrap'
 
@@ -35,6 +35,17 @@ function Cocina()
   }, [menuOpen, showHelp])
 
   return (
+    <>
+      <Navbar color="dark" dark expand="md" className="w-100 m-0 shadow-sm">
+        <NavbarBrand href="#">Food DEI S.A de R.L</NavbarBrand>
+      <div className="ms-auto d-flex gap-3 align-items-center text-white">
+        <span>Saldo disponible:<strong> $25.00</strong></span>
+        <span>
+          Total de tu reserva: <Badge color="dark" pill className = "fs-6">$0.00</Badge>
+        </span>
+      </div>
+      </Navbar>
+
     <main className="app-fondo">
       <nav className={`menu${menuOpen ? ' menu-is-open' : ''}`} aria-label="Menú del juego" ref={menuExtend}>
         <button
@@ -66,9 +77,10 @@ function Cocina()
           </Link>
         </div>
       </nav>
-      <Row>
-        <Col xs="12" md="4">
-      <Card className="game-card shadow">
+
+      <Row className="w-100 justify-content-center">
+        <Col xs="12" md="4" className="mb-4">
+      <Card className="game-card shadow h-100">
         <CardBody className="game-card-body">
           <CardImg top src="/img/pizza-margarita.jpg" alt="Pizza Margarita" />
           <p className="game-acom-icono">Menu</p>
@@ -82,8 +94,9 @@ function Cocina()
         </CardBody>
       </Card>
       </Col>
-      <Col xs="12" md="4">
-      <Card className="game-card shadow">
+
+      <Col xs="12" md="4" className="mb-4">
+      <Card className="game-card shadow h-100">
         <CardBody className="game-card-body">
           <CardImg top src="/img/pasta-bolonesa.jpg" alt="Pasta Boloñesa" />
           <p className="game-acom-icono">Menu</p>
@@ -97,8 +110,9 @@ function Cocina()
         </CardBody>
       </Card>
       </Col>
+
       <Col xs="12" md="4">
-      <Card className="game-card shadow">
+      <Card className="game-card shadow h-100">
         <CardBody className="game-card-body">
           <CardImg top src="/img/pasta-alfredo.jpg" alt="Pasta Alfredo" />
           <p className="game-acom-icono">Menu</p>
@@ -114,6 +128,7 @@ function Cocina()
       </Col>
       </Row>
     </main>
+  </>
   )
 }
 
