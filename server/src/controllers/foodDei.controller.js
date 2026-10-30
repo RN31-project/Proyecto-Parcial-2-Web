@@ -1,12 +1,12 @@
 import { calcularTotalReserva } from '../utils/helpers.js';
 // --- ESTADO EN MEMORIA (Food DEI S.A. de R.L.) ---
 let menu = [
-    { id: 101, nombre: "Pollo asado", precio: 4.00, stock: 12, categoria: "Fuerte" },
-    { id: 102, nombre: "Carne asada", precio: 5.00, stock: 8, categoria: "Fuerte" },
-    { id: 103, nombre: "Robalo chicharroneado", precio: 6.00, stock: 5, categoria: "Fuerte" },
-    { id: 201, nombre: "Ensalada de lechuga y tomate", precio: 2.00, stock: 15, categoria: "Acompañamiento" },
-    { id: 202, nombre: "Arroz blanco", precio: 1.50, stock: 20, categoria: "Acompañamiento" },
-    { id: 203, nombre: "Papas fritas", precio: 2.50, stock: 10, categoria: "Acompañamiento" },
+    { id: 101, nombre: "Pollo asado", precio: 4.00, stock: 12, categoria: "Fuerte", img: "/img/Pollo-asado.jpg" },
+    { id: 102, nombre: "Carne asada", precio: 5.00, stock: 8, categoria: "Fuerte", img: "/img/Carne-asada.jpg" },
+    { id: 103, nombre: "Robalo chicharroneado", precio: 6.00, stock: 5, categoria: "Fuerte", img: "/img/Robalo.jpg" },
+    { id: 201, nombre: "Ensalada de lechuga y tomate", precio: 2.00, stock: 15, categoria: "Acompañamiento", img: "/img/Ensalada.jpg" },
+    { id: 202, nombre: "Arroz blanco", precio: 1.50, stock: 20, categoria: "Acompañamiento", img: "/img/Arroz.jpg" },
+    { id: 203, nombre: "Papas fritas", precio: 2.50, stock: 10, categoria: "Acompañamiento", img: "/img/papas-fritas.jpg" },
 ];
 
 let reservaUsuario = {
@@ -26,7 +26,8 @@ const getReserva = (_req, res) => {
     res.json({
         saldo: reservaUsuario.saldo,
         itemsReservados: reservaUsuario.itemsReservados,
-        total: Number(total.toFixed(2))
+        total: Number(total.toFixed(2)),
+        confirmada: reservaUsuario.confirmada
     });
 };
 
@@ -34,7 +35,7 @@ const getReserva = (_req, res) => {
 const agregarReserva = (req, res) => {
     // Si la reserva ya fue confirmada, no se puede modificar a menos que se reinicie
     if (reservaUsuario.confirmada) {
-        return res.status(400).json({ error: "La reserva ya fue confirmada. Debe reiniciarla para hacer cambios." });
+        return res.status(400).json({ message: "La reserva ya fue confirmada. Debe reiniciarla para hacer cambios." });
     }
 
     const { alimentoId, cantidad } = req.body;
@@ -43,7 +44,7 @@ const agregarReserva = (req, res) => {
 
     const plato = menu.find(p => p.id === idPlato);
     if (!plato) {
-        return res.status(404).json({ error: "Plato no encontrado" });
+        return res.status(404).json({ message: "Plato no encontrado" });
     }
 
     // Validación preventiva: verificar que el stock en cocina sea al menos el que intenta agregar al carrito
@@ -71,7 +72,7 @@ const agregarReserva = (req, res) => {
                 reservaUsuario.itemsReservados = reservaUsuario.itemsReservados.filter(i => i.id !== idPlato);
             }
         }
-        return res.status(400).json({ error: "Saldo insuficiente para esta cantidad" });
+        return res.status(400).json({ message: "Saldo insuficiente para esta cantidad" });
     }
 
     res.json({ message: "Plato agregado a la reserva actual", reserva: reservaUsuario });
@@ -82,7 +83,7 @@ const agregarReserva = (req, res) => {
 const actualizarPorciones = (req, res) => {
     // Si la reserva ya fue confirmada, no se puede alterar el carrito
     if (reservaUsuario.confirmada) {
-        return res.status(400).json({ error: "La reserva ya fue confirmada. Debe reiniciarla para hacer cambios." });
+        return res.status(400).json({ message: "La reserva ya fue confirmada. Debe reiniciarla para hacer cambios." });
     }
 
     const idPlato = Number(req.params.id);
@@ -91,12 +92,12 @@ const actualizarPorciones = (req, res) => {
 
     // Validación: la cantidad no puede ser negativa
     if (isNaN(nuevaCantidad) || nuevaCantidad < 0) {
-        return res.status(400).json({ error: "La cantidad debe ser un número válido mayor o igual a 0" });
+        return res.status(400).json({ message: "La cantidad debe ser un número válido mayor o igual a 0" });
     }
 
     const itemIndex = reservaUsuario.itemsReservados.findIndex(i => i.id === idPlato);
     if (itemIndex === -1) {
-        return res.status(404).json({ error: "El plato no está en la reserva" });
+        return res.status(404).json({ message: "El plato no está en la reserva" });
     }
 
     const plato = menu.find(p => p.id === idPlato);
@@ -104,7 +105,7 @@ const actualizarPorciones = (req, res) => {
 
     // Validar que el stock en la cocina sea suficiente para la nueva cantidad solicitada
     if (plato && nuevaCantidad > plato.stock) {
-        return res.status(400).json({ error: "Stock insuficiente en el menú para esta cantidad" });
+        return res.status(400).json({ message: "Stock insuficiente en el menú para esta cantidad" });
     }
 
     // Guardar la cantidad anterior por si hay que revertir por saldo
@@ -116,7 +117,7 @@ const actualizarPorciones = (req, res) => {
     if (nuevoTotal > reservaUsuario.saldo) {
         // Revertir el cambio en el carrito
         itemActual.cantidad = cantidadAnterior;
-        return res.status(400).json({ error: "Saldo insuficiente para esta cantidad" });
+        return res.status(400).json({ message: "Saldo insuficiente para esta cantidad" });
     }
 
     // Si la nueva cantidad es 0, eliminamos el ítem por completo de la reserva
@@ -133,7 +134,7 @@ const eliminarReserva = (req, res) => {
 
     const itemIndex = reservaUsuario.itemsReservados.findIndex(i => i.id === idPlato);
     if (itemIndex === -1) {
-        return res.status(404).json({ error: "El plato no se encuentra en la reserva" });
+        return res.status(404).json({ message: "El plato no se encuentra en la reserva" });
     }
 
     const item = reservaUsuario.itemsReservados[itemIndex];
@@ -177,18 +178,18 @@ const reiniciarReserva = (_req, res) => {
 // --- ENDPOINT NUEVO: POST /api/reserva/confirmar (Aquí es donde se BLOQUEA el stock) ---
 const confirmarReserva = (_req, res) => {
     if (reservaUsuario.itemsReservados.length === 0) {
-        return res.status(400).json({ error: "No hay platillos en la reserva para confirmar" });
+        return res.status(400).json({ message: "No hay platillos en la reserva para confirmar" });
     }
 
     if (reservaUsuario.confirmada) {
-        return res.status(400).json({ error: "Esta reserva ya había sido confirmada anteriormente" });
+        return res.status(400).json({ message: "Esta reserva ya había sido confirmada anteriormente" });
     }
 
     // 1. Validar por última vez el stock global antes de bloquear
     for (const item of reservaUsuario.itemsReservados) {
         const plato = menu.find(p => p.id === item.id);
         if (!plato || plato.stock < item.cantidad) {
-            return res.status(400).json({ error: `Stock insuficiente para el plato ID ${item.id}` });
+            return res.status(400).json({ message: `Stock insuficiente para el plato ID ${item.id}` });
         }
     }
 
