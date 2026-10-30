@@ -182,7 +182,7 @@ function Cocina()
 
       <Navbar color="dark" dark expand="md" className="w-100 m-0 shadow-sm">
         <NavbarBrand href="#" className="kaushan-script-regular">
-          <img src="/img/logo_sin_fondo.jpg" alt="Logo Food DEI" className="logo-navbar" />
+          <img src="/img/logoFood.png" alt="Logo Food DEI" className="logo-navbar" />
           Food DEI S.A de R.L</NavbarBrand>
         <div className="ms-auto d-flex gap-3 align-items-center text-white">
           <span>
