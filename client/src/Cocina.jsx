@@ -123,6 +123,7 @@ function Cocina()
             throw new Error(data.message || "Error al reiniciar reserva");
           }
           await cargarDatos();
+          setTiempo(300); // Reinicia el temporizador a 5 minutos
         }catch(error){
           setErrorMsg(error.message);
         }
@@ -179,8 +180,31 @@ function Cocina()
 
   return (
     <> {/*Contenedor principal de React para permitir multiples elementos de Raiz (se uzo IA para esta solucion)*/}
+    {reserva.confirmada && (
+  <div className="pantalla-confirmada">
+    <div className="tarjeta-confirmada">
+      <h2>Reserva Confirmada</h2>
+      <img src="/img/check.png" alt="Check exitoso" className="check-confirmada" />
+      <h4>Reserva confirmada. Tu pedido se esta procesando.</h4>
+      <div className="bloque-resumen">
+        {reserva.itemsReservados.map((item) => {
+          const plato = menu.find(p => p.id === item.id);
+          return (
+            <p key={item.id} className="resumen-item">
+              {plato ? plato.nombre : 'Plato no encontrado'} - Cantidad: {item.cantidad}
+            </p>
+          )
+        })}
+        <p className="resumen-total">Total de la reserva: <strong>${reserva.total.toFixed(2)}</strong></p>
+      </div>
+      <Button className="boton-reserva" onClick={reiniciarReserva}>
+        Hacer otra reserva
+      </Button>
+    </div>
+  </div>
+)}
 
-      <Navbar color="dark" dark expand="md" className="w-100 m-0 shadow-sm">
+      <Navbar dark expand="md" className="w-100 m-0 barra-flotante">
         <NavbarBrand href="#" className="kaushan-script-regular">
           <img src="/img/logoFood.png" alt="Logo Food DEI" className="logo-navbar" />
           Food DEI S.A de R.L</NavbarBrand>
@@ -288,7 +312,7 @@ function Cocina()
             <Button color="success" className="w-100 mt-3" disabled={reserva.itemsReservados.length === 0 || reserva.confirmada} onClick={confirmarReserva}>
               Confirmar Reserva
             </Button>
-            <Button color="success" className="w-100 mt-2" disabled={reserva.itemsReservados.length === 0 || !reserva.confirmada} onClick={reiniciarReserva}>
+            <Button color="success" className="w-100 mt-2" disabled={reserva.itemsReservados.length === 0} onClick={reiniciarReserva}>
               Reiniciar Reserva
             </Button>
           </CardBody>
