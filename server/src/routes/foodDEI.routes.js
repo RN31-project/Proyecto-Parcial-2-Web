@@ -1,6 +1,6 @@
-const express = require('express');
+import express from 'express';
+import controller from '../controllers/foodDei.controller.js';
 const router = express.Router();
-const controller = require('../controllers/foodDei.controller');
 
 // --- RUTAS DE LA API ---
 router.get('/menu', controller.getMenu);
@@ -11,4 +11,4 @@ router.delete('/reserva/eliminar/:id', controller.eliminarReserva);
 router.post('/reserva/reiniciar', controller.reiniciarReserva);
 router.post('/reserva/confirmar', controller.confirmarReserva);
 
-module.exports = router;
+export default router;
