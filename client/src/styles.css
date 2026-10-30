@@ -1,7 +1,32 @@
+.kaushan-script-regular {
+  font-family: "Nunito Sans", sans-serif;
+  font-weight: 800;
+}
+
+.logo-navbar {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.barra-flotante {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1500;
+  background: rgba(20, 33, 61, 0.55) !important;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
 :root {
   font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  color: #172033;
-  background: #f4f7fb;
+  color: #06457f;
+  background: #262b40;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -14,21 +39,400 @@ body {
   margin: 0;
 }
 
-.app-shell {
+.app-fondo {
+  display: grid;
   min-height: 100vh;
-  background: radial-gradient(circle at top right, #e5edff, transparent 35%), #f4f7fb;
+  place-items: center;
+  padding: 24px;
+  background:
+    radial-gradient(ellipse at 15% 15%, #06457f 0, transparent 36%),
+    radial-gradient(ellipse at 90% 85%, #06457f 0, transparent 32%),
+    #262b40;
 }
 
-.welcome-card {
-  max-width: 720px;
-  margin: 8vh auto 0;
-  border: 1px solid #e6eaf1;
-  border-radius: 1rem;
+.alerta-flotante {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  min-width: 320px;
+  max-width: 460px;
 }
 
-.eyebrow {
-  color: #5269d8;
-  font-size: 0.75rem;
+.game-card {
+  width: 100%;
+  max-width: 460px;
+  border: 1px solid #262b40;
+  border-radius: 24px;
+  background: #262b40
+}
+
+.game-card-body {
+  padding: 44px 40px 32px;
+  text-align: center;
+}
+
+.game-icon {
+  display: grid;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 22px;
+  place-items: center;
+  border-radius: 20px;
+  background: #a8c4ec;
+  color: #06457f;
+  font-size: 2rem;
+  font-weight: 800;
+}
+
+.game-acom-icono {
+  margin-bottom: 8px;
+  color: #A8C4EC;
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.game-card h1 {
+  margin-bottom: 12px;
+  color: #A8C4EC;
+  font-size: clamp(1.8rem, 6vw, 2.2rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+}
+
+.game-description {
+  margin: 0 auto 28px;
+  color: #A8C4EC;
+  line-height: 1.6;
+}
+
+.dice-section {
+  display: grid;
+  justify-items: center;
+  gap: 12px;
+  margin: 0 auto 28px;
+  padding: 18px;
+  border: 1px solid rgba(168, 196, 236, 0.25);
+  border-radius: 16px;
+  background: rgba(6, 69, 127, 0.18);
+}
+
+.dice-label {
+  margin: 0;
+  color: #A8C4EC;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+/* Cambios de estilo para el resultado del dado */
+.dice-result {
+  display: grid;
+  width: 76px;
+  height: 76px;
+  place-items: center;
+  border: 2px solid #A8C4EC;
+  border-radius: 18px;
+  background: #A8C4EC;
+  box-shadow: 0 6px 0 #668bbd;
+  color: #06457f;
+  font-size: 2rem;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  transition: background-color 250ms ease, border-color 250ms ease, box-shadow 250ms ease, color 250ms ease;
+}
+/* Cambios de estilo para el resultado del dado cuando es correcto */
+.dice-result.is-correct {
+  border-color: #86efac;
+  background: #86efac;
+  box-shadow: 0 6px 0 #22c55e;
+  color: #14532d;
+}
+
+.dice-result.is-rolling {
+  animation: dice-shake 0.16s linear infinite alternate;
+}
+
+@keyframes dice-shake {
+  from {
+    transform: rotate(-8deg) translateY(-2px);
+  }
+  to {
+    transform: rotate(8deg) translateY(2px);
+  }
+}
+
+.game-card .form-control {
+  min-height: 52px;
+  border-color: #262b40;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.game-card .form-control:focus {
+  border-color: #4854c5;
+  box-shadow: 0 0 0 3px rgba(72, 84, 197, 0.2);
+}
+
+.guess-button {
+  min-height: 52px;
+  border: 0;
+  border-radius: 12px;
+  background: #0474c4;
   font-weight: 700;
-  letter-spacing: 0.12em;
+}
+/* Cambios de estilo para el botón al pasar el mouse */
+
+.game-message {
+  min-height: 48px;
+  margin: 24px 0 8px;
+  color: #A8C4EC;
+  line-height: 1.5;
+}
+
+.attempt-count {
+  margin: 0;
+  color: #a8c4ec;
+  font-size: 0.85rem;
+}
+
+.app-fondo {
+  position: relative;
+  padding-top: 90px;
+}
+
+.menu {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 2000;
+  display: grid;
+  justify-items: end;
+  gap: 12px;
+}
+
+.menu-toggle {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  place-items: center;
+  border: 1px solid rgba(168, 196, 236, 0.35);
+  border-radius: 50%;
+  background: #06457f;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.28);
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 180ms ease;
+}
+
+.menu-toggle:hover {
+  transform: scale(1.05);
+  background: #0474c4;
+}
+
+.menu-toggle:focus-visible,
+.menu-item:focus-visible,
+.menu-Adivinanumero button:focus-visible {
+  outline: 3px solid #86efac;
+  outline-offset: 3px;
+}
+
+.hamburger {
+  position: absolute;
+  width: 23px;
+  height: 2px;
+  border-radius: 2px;
+  background: #A8C4EC;
+  transition: transform 180ms ease, opacity 180ms ease;
+}
+
+.hamburger-1 {
+  transform: translateY(-7px);
+}
+
+.hamburger-3 {
+  transform: translateY(7px);
+}
+
+.menu-is-open .hamburger-1 {
+  transform: rotate(45deg);
+}
+
+.menu-is-open .hamburger-2 {
+  opacity: 0;
+}
+
+.menu-is-open .hamburger-3 {
+  transform: rotate(-45deg);
+}
+/* Cambios de estilo para el menú cuando está abierto hace la animaciónde la x*/
+.menu-items {
+  display: grid;
+  gap: 8px;
+}
+
+.menu-items[hidden] {
+  display: none;
+}
+
+.menu-item {
+  display: flex;
+  min-width: 168px;
+  min-height: 48px;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 14px;
+  border: 1px solid rgba(168, 196, 236, 0.35);
+  border-radius: 14px;
+  background: #262b40;
+  box-shadow: 0 5px 16px rgba(0, 0, 0, 0.24);
+  color: #A8C4EC;
+  font: inherit;
+  font-size: 0.92rem;
+  font-weight: 700;
+  text-align: left;
+  text-decoration: none;
+  cursor: pointer;
+  animation: menu-item-in 160ms ease both;
+}
+
+.menu-item:hover {
+  background: #06457f;
+  color: #fff;
+}
+/* Cambios de estilo para el icono del item del menú asi se iluminan */
+.menu-item-icon {
+  display: grid;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 30px;
+  place-items: center;
+  border-radius: 50%;
+  background: #A8C4EC;
+  color: #06457f;
+  font-size: 1.15rem;
+}
+
+
+@keyframes menu-item-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+}
+/* Cambios de estilo para el menú cuando está abierto hace la animación de entrada de los items del menú asi no salen de una altura  */
+
+@media (max-width: 480px) {
+  .game-card-body {
+    padding: 36px 24px 28px;
+  }
+
+  .menu {
+    top: 12px;
+    right: 12px;
+  }
+}
+.carrito-titulo {
+  color: #cfe0ff;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.carrito-item {
+  background: transparent;
+  color: #cfe0ff;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+.plato-img {
+  height: 160px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+}
+
+.pantalla-confirmada {
+  position: fixed;
+  inset: 0;                
+  z-index: 3000;            
+  background: #14213d;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+
+.bloque-resumen {
+  background: #0f172a;
+  color: #e2e8f0;
+  font-family: monospace;
+  border-radius: 16px;
+  padding: 1rem 1.25rem;
+  text-align: left;
+  margin: 1rem 0;
+}
+
+.check-confirmada {
+  width: 140px;
+  filter: hue-rotate(390deg) saturate(1.2);        
+}
+
+.check-confirmada {
+  width: 110px;
+  height: 110px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 1rem;
+  animation: aparecer-check 0.5s ease-out;
+}
+
+@keyframes aparecer-check {
+  0%   { transform: scale(1); opacity: 0; }
+  70%  { transform: scale(1.15); opacity: 1; }
+  100% { transform: scale(1); }
+}
+
+.boton-reserva {
+  background: #198754;
+  color: #fff;
+  border: none;
+  padding: 0.8rem 1.6rem;
+  border-radius: 14px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  box-shadow: 0 8px 20px rgba(25, 135, 84, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.boton-reserva:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 26px rgba(25, 135, 84, 0.45);
+}
+
+.boton-reserva:active {
+  transform: translateY(0);
+}
+
+.tarjeta-confirmada {
+  background: #bddcef;
+  border-radius: 28px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 560px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  color: #0f172a;
 }
